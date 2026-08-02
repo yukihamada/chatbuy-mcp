@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>chatbuy — 言えば、届く</title>
+<meta name="description" content="言えば、商品と合計が出て、確認ページまで開く。決済の最後の1クリックはあなた自身。あなたのログインはあなたのマシンの中だけ。">
+<meta property="og:title" content="chatbuy — 言えば、届く">
+<meta property="og:description" content="短いひとことで、商品も合計も確認ページまで。決済の最後の1クリックは、いつもあなた。">
+<meta property="og:type" content="website">
+<script defer src="https://enabler-analytics.fly.dev/t.js"></script>
+<style>
+:root{--bg:#0e1116;--card:#161b22;--line:#232a35;--mut:#8a93a0;--fg:#e9edf2;--ac:#3b82f6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;max-width:880px;margin:0 auto}
+.logo{font-weight:800;font-size:18px;letter-spacing:-.02em}
+.logo .dot{color:var(--ac)}
+.lang{font-size:13px;color:var(--mut);cursor:pointer;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:transparent;color:var(--mut)}
+.hero{text-align:center;padding:72px 24px 56px}
+.hero h1{font-size:clamp(34px,7vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.08}
+.hero h1 .g{background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:clamp(15px,2.4vw,19px);margin:18px auto 0;max-width:540px}
+.cta{display:inline-flex;gap:10px;margin-top:34px;flex-wrap:wrap;justify-content:center}
+.btn{padding:14px 24px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;border:0;cursor:pointer}
+.btn.p{background:var(--ac);color:#fff}.btn.g{background:var(--card);color:var(--fg);border:1px solid var(--line)}
+.demo{max-width:520px;margin:48px auto 0;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:left}
+.demo .bar{display:flex;gap:8px}
+.demo input{flex:1;background:#0e1116;border:1px solid var(--line);border-radius:10px;color:#fff;padding:12px;font-size:15px}
+.demo .send{background:var(--ac);border:0;border-radius:10px;color:#fff;padding:0 16px;font-weight:700}
+.demo .row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-top:1px solid var(--line);margin-top:12px}
+.demo .row:first-of-type{margin-top:14px}
+.demo .ic{width:34px;height:34px;border-radius:8px;background:#0e1116;display:grid;place-items:center;font-size:18px}
+.demo .t{flex:1;font-size:14px}.demo .t small{color:var(--mut);display:block;font-size:12px}
+.demo .pr{font-weight:700}
+.demo .tot{display:flex;justify-content:space-between;font-weight:800;font-size:17px;border-top:1px solid var(--line);margin-top:8px;padding-top:14px}
+.demo .pay{width:100%;margin-top:12px;background:#16a34a;border:0;border-radius:10px;color:#fff;padding:13px;font-weight:700;font-size:15px}
+.demo .hint{color:var(--mut);font-size:12px;margin-top:8px;text-align:center}
+section{padding:56px 0}
+h2{font-size:clamp(22px,4vw,30px);font-weight:800;letter-spacing:-.02em;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.step .n{color:var(--ac);font-weight:800;font-size:13px}
+.step h3{font-size:16px;margin:8px 0 6px}
+.step p{color:var(--mut);font-size:14px}
+.why{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;margin-top:30px;text-align:center}
+.why h3{font-size:18px}.why p{color:var(--mut);font-size:15px;margin-top:10px;max-width:560px;margin-left:auto;margin-right:auto}
+.badge{display:inline-block;font-size:12px;color:#34d399;border:1px solid #1f4d3a;border-radius:999px;padding:4px 12px;margin-bottom:14px}
+.install{background:#0a0d12;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-top:34px;max-width:520px;margin-left:auto;margin-right:auto;text-align:left;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;color:#a7f3d0;overflow-x:auto}
+.install .l{color:var(--mut);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;font-size:12px;margin-bottom:6px}
+footer{border-top:1px solid var(--line);padding:30px 24px;text-align:center;color:var(--mut);font-size:13px}
+@media(max-width:600px){.steps{grid-template-columns:1fr}}
+[data-en]{display:none}
+body.en [data-ja]{display:none}body.en [data-en]{display:inline}
+body.en .step [data-en],body.en .demo [data-en]{display:block}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">chatbuy<span class="dot">.ai</span></div>
+  <button class="lang" onclick="document.body.classList.toggle('en')"><span data-ja>EN</span><span data-en>日本語</span></button>
+</header>
+
+<div class="hero">
+  <div class="badge">● local-first / あなたのログインはあなたの中だけ</div>
+  <h1><span data-ja>言えば、<span class="g">届く</span>。</span><span data-en><span class="g">Say it.</span><br>It arrives.</span></h1>
+  <p>
+    <span data-ja>短いひとこと。商品も、合計も、確認画面まで。決済の最後の1クリックは、いつもあなた。</span>
+    <span data-en>One short sentence. Products, total, and the review page — ready. The final click is always yours.</span>
+  </p>
+  <div class="cta">
+    <a class="btn p" href="#how"><span data-ja>使い方を見る</span><span data-en>See how</span></a>
+    <a class="btn g" href="https://github.com/yukihamada/chatbuy-mcp"><span data-ja>GitHubで見る</span><span data-en>View on GitHub</span></a>
+  </div>
+
+  <div class="demo">
+    <div class="bar">
+      <input value="犬が長生きする健康な食材" readonly>
+      <button class="send">▶</button>
+    </div>
+    <div class="row"><div class="ic">🐟</div><div class="t">銀鮭 切り身 冷凍 無塩<small>オメガ3 · Prime</small></div><div class="pr">¥1,280</div></div>
+    <div class="row"><div class="ic">🫐</div><div class="t">冷凍ブルーベリー 無添加<small>抗酸化 · Prime</small></div><div class="pr">¥980</div></div>
+    <div class="row"><div class="ic">🍠</div><div class="t">焼き芋 冷凍<small>食物繊維 · Prime</small></div><div class="pr">¥760</div></div>
+    <div class="tot"><span data-ja>合計</span><span data-en>Total</span><span>¥3,020</span></div>
+    <button class="pay"><span data-ja>確認ページを開く</span><span data-en>Open review page</span></button>
+    <div class="hint"><span data-ja>注文の確定は、開いたブラウザ上であなたが押します。</span><span data-en>You place the order yourself, on the page that opens.</span></div>
+  </div>
+</div>
+
+<section id="how" class="wrap">
+  <h2><span data-ja>3ステップで、おしまい</span><span data-en>Three steps. Done.</span></h2>
+  <div class="steps">
+    <div class="step"><div class="n">01</div>
+      <h3><span data-ja>言う</span><span data-en>Say it</span></h3>
+      <p><span data-ja>「犬が長生きする食材」など短いひとことを入れるだけ。</span><span data-en>Type one short sentence, like "healthy food my dog can live long on."</span></p></div>
+    <div class="step"><div class="n">02</div>
+      <h3><span data-ja>確かめる</span><span data-en>Review</span></h3>
+      <p><span data-ja>最適な商品と合計金額が並ぶ。中身を見てから決める。</span><span data-en>The best products and the total line up. You decide before anything happens.</span></p></div>
+    <div class="step"><div class="n">03</div>
+      <h3><span data-ja>あなたが確定する</span><span data-en>You confirm</span></h3>
+      <p><span data-ja>カート/確認ページが開く。注文確定ボタンは、必ずあなた自身の手で押す。chatbuyは一切押さない。</span><span data-en>The cart/review page opens. You press the final "place order" button yourself — chatbuy never does.</span></p></div>
+  </div>
+
+  <div class="install">
+    <div class="l">Claude Code / Claude Desktop に追加:</div>
+    claude mcp add chatbuy -- npx github:yukihamada/chatbuy-mcp
+  </div>
+
+  <div class="why">
+    <h3><span data-ja>あなたのログインは、あなたのマシンの中だけ</span><span data-en>Your login never leaves your machine</span></h3>
+    <p>
+      <span data-ja>chatbuy はクラウドにあなたのアカウントを預けません。買い物エージェントはあなたのMacの上で、あなたのログイン済みセッションを使って動きます。パスワードも決済も、外に出ない。そして決済確定ボタンには、chatbuyのどのツールも一切触れません。</span>
+      <span data-en>chatbuy never hands your account to a server. The agent runs on your own machine, using your already-logged-in session. Passwords and payments stay local — and no chatbuy tool ever touches the final purchase button. That click is always yours.</span>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    chatbuy.ai · <span data-ja>言えば、届く。</span><span data-en>Say it. It arrives.</span><br>
+    <span style="opacity:.6">© 2026 Enabler Inc. / 株式会社イネブラ</span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "chatbuy-mcp",
+  "version": "1.0.0",
+  "description": "chatbuy — 言えば、届く。ローカルで動くAI買い物MCPサーバー。あなたのログインはあなたのマシンの中だけ。",
+  "type": "module",
+  "main": "server.mjs",
+  "bin": {
+    "chatbuy-mcp": "server.mjs"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "smoke": "node test/smoke.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "playwright": "^1.62.1",
+    "zod": "^3.24.0"
+  }
+}
