@@ -24,10 +24,12 @@ await client.connect(transport);
 
 const { tools } = await client.listTools();
 const names = tools.map((t) => t.name).sort();
-check('4 tools', names.length === 4, names.join(','));
+check('5 tools', names.length === 5, names.join(','));
 check(
   'expected tool names',
-  ['chatbuy_login', 'chatbuy_review', 'chatbuy_search', 'chatbuy_status'].every((n) => names.includes(n)),
+  ['chatbuy_activate', 'chatbuy_login', 'chatbuy_review', 'chatbuy_search', 'chatbuy_status'].every((n) =>
+    names.includes(n),
+  ),
   names.join(','),
 );
 check(

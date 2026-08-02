@@ -6,6 +6,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import * as amazon from './lib/sites/amazon.mjs';
+import { gateSearch, activate, PAYMENT_LINK } from './lib/license.mjs';
 
 const SITES = { amazon };
 
@@ -37,7 +38,8 @@ const server = new McpServer(
       'chatbuy — 言えば、届く。あなたのマシン上でだけ動くローカルAI買い物MCP。' +
       'chatbuy_login → chatbuy_search → chatbuy_review の順で使う。' +
       '購入確定(決済)は一切自動化しない: chatbuy_review はカート/確認ページを開くところで止まり、' +
-      '最後の「注文を確定する」ボタンは必ずあなた自身がブラウザ画面上で押す。決済系のツールは存在しない。',
+      '最後の「注文を確定する」ボタンは必ずあなた自身がブラウザ画面上で押す。決済系のツールは存在しない。' +
+      `月${20}回まで無料。それ以降は ${PAYMENT_LINK} のサブスク(任意)で無制限 — chatbuy_activate で有効化する。`,
   },
 );
 
@@ -66,6 +68,8 @@ server.tool(
     site: z.string().optional(),
   },
   async ({ prompt, site }) => {
+    const gate = await gateSearch();
+    if (!gate.allowed) return text(gate);
     const adapter = siteAdapter(site);
     const { label, items } = plan(prompt);
     const picks = [];
@@ -78,8 +82,17 @@ server.tool(
       }
     }
     const total = picks.reduce((sum, p) => sum + (p.yen || 0), 0);
-    return text({ label, items: picks, total });
+    const result = { label, items: picks, total };
+    if (!gate.licensed) result.free_searches_remaining = gate.remaining;
+    return text(result);
   },
+);
+
+server.tool(
+  'chatbuy_activate',
+  'サポーターサブスク(任意)を有効化する。登録済みのメールアドレスを渡すと無料枠の上限が外れる。/ Activate the optional supporter subscription by email — removes the free-tier search limit.',
+  { email: z.string().email().describe('Stripeサブスク登録に使ったメールアドレス') },
+  async ({ email }) => text(await activate(email)),
 );
 
 server.tool(

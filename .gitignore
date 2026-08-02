@@ -3,3 +3,4 @@ profile/
 .chatbuy/
 *.log
 .DS_Store
+.stripe_test_*
